@@ -1,6 +1,7 @@
 
 body, html {margin: 0;padding: 0;}
 
+
 #wrapwrapper{
     height: 100vh;
     width: 100hh;
@@ -9,6 +10,7 @@ body, html {margin: 0;padding: 0;}
     flex-flow: column nowrap;
     justify-content: space-evenly;
     align-items: center;
+    font-family: Courier; 
 }
 
 #wrapper{
@@ -21,6 +23,7 @@ body, html {margin: 0;padding: 0;}
     align-items: center;
 }
 
+
 #upper{
     height: 30%;
     width: 80%;
@@ -31,6 +34,8 @@ body, html {margin: 0;padding: 0;}
     align-items: center;
 }
 
+
+
 #lower-wrap{
     height: 60%;
     width: 80%;
@@ -38,16 +43,36 @@ body, html {margin: 0;padding: 0;}
     display: flex;
     justify-content: space-evenly;
     align-items : center;
+
+}
+
+
+
+#lower-wrap img{
+   
+        width: 100%; 
+        max-width: 300px; 
+        height: auto; 
+      
 }
 
 #user-input{
+    position: static;
     height: 30%;
     width: 50%;
     background-color: #2A7488;
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+
+
+#submit-error{
+    position: absolute;
+    margin-top: 45px;
+    color: rgb(255, 58, 58);
+    font-size: 15px;
 }
 
 #textInput{
@@ -64,12 +89,35 @@ body, html {margin: 0;padding: 0;}
     align-items: center;
 }
 
+
+
+#output{
+    width: 100%;
+    
+}
+
 .lower-column{
+    box-sizing: border-box;
+    padding: 10px;
+    list-style-position: inside;
     height: 80%;
     width: 40%;
     background-color:#2A7488;    
     display: flex;
-    justify-content: center;
+    overflow-y: auto;
 }
 
+a:link{
+    text-decoration: none;
+}
+
+a:visited{
+    color:black;
+}
+
+a:hover{
+    color: rgb(50,50,50);
+    font-weight: bold;
+    font-size: 18px;
+}
 
