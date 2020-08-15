@@ -75,6 +75,8 @@ body, html {margin: 0;padding: 0;}
     font-size: 15px;
 }
 
+
+
 #textInput{
     height: 20px;
     width: 60%;
@@ -96,6 +98,24 @@ body, html {margin: 0;padding: 0;}
     
 }
 
+#create_input_name{
+    width: 90%;
+    height: 20px;
+    background: black;
+    color: green;
+}
+#create_input_code{
+    width: 90%;
+    height:100%;
+    background: black;
+    color: green;
+}
+
+#send_input_code{
+    width: 90%;
+    text: black;
+}
+
 .lower-column{
     box-sizing: border-box;
     padding: 10px;
@@ -106,6 +126,25 @@ body, html {margin: 0;padding: 0;}
     display: flex;
     overflow-y: auto;
 }
+
+.lower-column2{
+    box-sizing: border-box;
+    padding: 10px;
+    list-style-position: inside;
+    height: 80%;
+    width: 40%;
+    background-color:#2A7488;    
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    font-size: 14px;
+    font-weight: bold;
+    
+}
+
+
 
 a:link{
     text-decoration: none;
