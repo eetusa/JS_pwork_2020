@@ -13,7 +13,7 @@ document.getElementById("textInput").addEventListener('keypress', function (e) {
     }
 });
 
-
+// clear error message on input change
 document.getElementById("textInput").addEventListener('input', function (e) {
     document.getElementById("submit-error").innerHTML=``;
 });
@@ -137,7 +137,7 @@ let lista = {
         div.innerHTML = div.innerHTML + `</ul>`;
         //--------------------------------------------------------------
 
-        // give id and place element
+        // give class for identifying and place element
         div.className="divl"
         document.getElementById("lower-left").appendChild(div);
 
@@ -228,7 +228,7 @@ let popup = {
         clearElements(1);
         document.getElementById("lower-right").className = "lower-column";
         let div = document.createElement('div');
-        div.innerHTML = `<p>Tässä <b>pyydetty</b> popup.`;
+        div.innerHTML = `<p>Tässä <b>pyydetty</b> popup.</p>`;
         div.id="ilmestynyt";
         div.className="divr"
         document.getElementById("lower-right").appendChild(div);
@@ -239,7 +239,7 @@ let popup = {
     }
 }
 
-// draws a canvas on lower-left element ~3times/second.
+// draws a canvas on lower-left element ~2,5times/second.
 // canvas consists of random letters on a xy-coordinate system
 let sade = {
 
@@ -254,7 +254,7 @@ let sade = {
         document.getElementById("lower-right").appendChild(div);
         const outputCanvas = document.querySelector('#output'); // select canvas
         const outputContext = outputCanvas.getContext('2d'); // create context 
-        let z=0; // counter to slowdown the update rate
+        let z=0; // counter to slowdown the update rate later
         // array of letters used for print
         outputContext.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '$', '+', '-', '*', '/', '=', '%', '"', '\'', '#', '&', '_', '(', ')', ',', '.', ';', ':', '?', '!', '\\', '|', '{', '}', '<', '>', '[', ']', '^', '~'];
         // ------------------------------------------
@@ -272,10 +272,10 @@ let sade = {
                 outputCanvas.width = width;
                 // set font
                 // fontWidth and fontHeight are used for size of 1 row/column
-                outputContext.font = `bold ${fontHeight}px Courier`;
+                outputContext.font = `bold ${fontHeight}px Courier`; // monospace font for constant row width / better look
                 const text = outputContext.measureText('@');
                 const fontWidth = parseInt(text.width); 
-                outputContext.textBaseline = 'top'; // prints at correct position
+                outputContext.textBaseline = 'top'; // prints at correct position relative to coordinates
 
                 for (let x = 0; x < width; x += fontWidth){
                     for (let y = 0; y < height; y += fontHeight){ // fontWidth and fontHeight are used for size of 1 row/column
@@ -350,6 +350,16 @@ let colorToggle = {
 // 1. input's 1. word is used to create functions name / the command it answers to,
 // with rest of input's words saved as parameters
 // 2. input is the code that is executed through eval
+//
+// comments: i) doesnt handle strings (or something inside brackets/parentehesis) 
+// as parametres (seperates them via spaces) <= change the function that breaks the input down
+// ii) Doesn't check for existing commands <= compare to a list
+// iii) Doesn't properly check the input code for what is a variable when transcripting
+// the code, so in "komento a" "alert(a);" both a's in the code "alert(a)" will
+// be treted as variable a and breaks the code. <= modify the transcript function to
+// be smart about correctly finding what is a variable (inside bracket/paranthesis, next to space, dot, operators)
+// iv) limited amount of parameters (5) <= not sure, smarter code (something relating to func(a)(b)(c) style of coding?)
+// However I decided to leave it be as is considering the assigment.
 let addOwnCode = {
     func(){ 
         const list = []; // updated list for later use
@@ -434,8 +444,9 @@ ${div2.value}`)){ // confirm inputs
                     }
                     let funcname = args[0]; // saves the functions name / call signal
 
-                    // unifies user given parametres inside the "code" (=lower text input) to different strings ("param0","param1",..)
+                    // generalizes user given parametres inside the "code" (=lower text input) to different strings ("param0","param1",..)
                     // done because the "code" is a string that is evaluated
+                    // code has 5 param max
                     let funcUpdated = updateFunction(div2.value,args[1],args[2],args[3],args[4],args[5]);
                     
                     // creates an object as master object's property
@@ -501,7 +512,7 @@ let master = {
 
 
 
-// evaluates a string as function, str may have parameters written "OIKLKXPOW0" etc
+// evaluates a string as function, str may have parameters written "OIKLKXPOW0" (random letters) etc
 function evalFunction(str, OIKLKXPOW0, OIKLKXPOW1, OIKLKXPOW2, OIKLKXPOW3, OIKLKXPOW4, OIKLKXPOW5){
 
     for (let i = 1; i<6; i++){
@@ -521,7 +532,7 @@ function isNumber(n){
 
 
 // replaces any found arg in str to corresponding OIKLKXPOW0, OIKLKXPOW1,...OIKLKXPOWN
-// (OIKLKXPOW is a random sequence of letters that is unlikely found in user inputted coode)
+// (OIKLKXPOW is a random sequence of letters that is unlikely found in user inputted code)
 function updateFunction(str, ...args){
 
     for (let i = 0; i < args.length; i++){
